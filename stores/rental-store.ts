@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import { getRentals, getRentalDetail } from '@/services/rental-service';
+import { getRentals, getRentalDetail, createRental } from '@/services/rental-service';
 import type { Rental } from '@/types/rental';
 
 export const useRentalStore = defineStore('rentalStore', () => {
@@ -23,6 +23,19 @@ export const useRentalStore = defineStore('rentalStore', () => {
     }
   };
 
+  // Tambahkan rental baru
+  const addRental = async (newRental: Omit<Rental, 'id' | 'wheelchair'>) => {
+    loading.value = true;
+    error.value = null;
+    try {
+      await createRental(newRental);
+      await fetchRentals(); // Update daftar rental setelah menambah data
+    } catch (err) {
+      error.value = 'Failed to add rental.';
+    } finally {
+      loading.value = false;
+    }
+  };
   // Fetch detail rental berdasarkan ID
   const fetchRentalDetail = async (id: string) => {
     loading.value = true;
@@ -36,5 +49,5 @@ export const useRentalStore = defineStore('rentalStore', () => {
     }
   };
 
-  return { rentals, rentalDetail, loading, error, fetchRentals, fetchRentalDetail };
+  return { rentals, rentalDetail, loading, error, fetchRentals, fetchRentalDetail, addRental };
 });
