@@ -25,7 +25,7 @@
           <a href="#features" class="text-gray-600 hover:text-teal-600"
             >Features</a
           >
-          <NuxtLink to="/rentals" class="text-gray-600 hover:text-teal-600"
+          <NuxtLink to="/wheelchairs" class="text-gray-600 hover:text-teal-600"
             >Products</NuxtLink
           >
           <a href="#contact" class="text-gray-600 hover:text-teal-600"

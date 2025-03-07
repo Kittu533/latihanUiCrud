@@ -1,6 +1,6 @@
 import { ref } from "vue";
 import { getRentals, createRental, getRentalDetail } from "@/services/rental-service";
-import { updateWheelchairStock } from "@/services/wheelchair-service"; // Tambahkan ini
+import { updateWheelchairStock, getWheelchairDetail } from "@/services/wheelchair-service";
 import type { Rental, RentalStatus } from "@/types/rental";
 
 export function useRentals() {
@@ -10,7 +10,8 @@ export function useRentals() {
   const error = ref<string | null>(null);
   const message = ref<string | null>(null);
 
-  const rental = ref({
+  const rental = ref<Rental>({
+    id: "", // Placeholder ID, akan digenerate oleh backend
     wheelchair_id: 1,
     customer_name: "",
     customer_phone: "",
@@ -18,17 +19,28 @@ export function useRentals() {
     return_date: "",
     rental_price: 0,
     total_price: 0,
+    status: "Pending" as RentalStatus,
   });
 
   const fetchRentals = async () => {
     loading.value = true;
     error.value = null;
     try {
-      rentals.value = await getRentals();
+      const response = await getRentals();
+      rentals.value = response; // Assuming response is already a Rental[]
     } catch (err) {
       error.value = "Gagal mengambil data rental.";
     } finally {
       loading.value = false;
+    }
+  };
+
+  const fetchWheelchairPrice = async (id: number) => {
+    try {
+      const wheelchair = await getWheelchairDetail(id);
+      rental.value.rental_price = wheelchair.price;
+    } catch (err) {
+      error.value = "Gagal mengambil harga kursi roda.";
     }
   };
 
@@ -37,6 +49,8 @@ export function useRentals() {
       error.value = "❌ Semua field wajib diisi!";
       return;
     }
+
+    await fetchWheelchairPrice(rental.value.wheelchair_id);
 
     const newRental: Omit<Rental, "id"> = {
       customer_name: rental.value.customer_name,
@@ -55,10 +69,7 @@ export function useRentals() {
     error.value = null;
     try {
       await createRental(newRental);
-
-      // 🔥 Update stok kursi roda di backend setelah rental berhasil dibuat
       await updateWheelchairStock(rental.value.wheelchair_id, -1);
-
       await fetchRentals();
       message.value = "✅ Rental berhasil ditambahkan!";
     } catch (err) {
