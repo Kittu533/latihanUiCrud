@@ -156,10 +156,10 @@ const deleteRental = async (id) => {
   try {
     // Panggil API DELETE untuk menghapus rental (soft delete jika di BE)
     await deleteRentalById(id);
-    alert("✅ Rental berhasil dihapus.");
+    alert("Rental berhasil dihapus.");
     await fetchRentals(); // Refresh daftar rental setelah penghapusan
   } catch (err) {
-    console.error("❌ Gagal menghapus rental:", err);
+    console.error("Gagal menghapus rental:", err);
     alert("Terjadi kesalahan saat menghapus rental.");
   }
 };

@@ -183,5 +183,5 @@ const resetFilters = () => {
   sortOption.value = "featured";
 };
 import { useFormat } from "@/composables/use-idr-fortmat"; // ✅ Import format fungsi
-const { formatPrice } = useFormat(); // ✅ Ambil fungsi formatPrice dari composable
+const { formatPrice } = useFormat(); //  Ambil fungsi formatPrice dari composable
 </script>

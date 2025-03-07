@@ -3,7 +3,7 @@ import type { Rental } from '@/types/rental';
 
 // GET semua rentals
 export const getRentals = async (): Promise<Rental[]> => {
-  const config = useRuntimeConfig(); // ✅ Panggil di dalam fungsi
+  const config = useRuntimeConfig(); //  Panggil di dalam fungsi
   const response = await axios.get(`${config.public.API_BASE_URL}/rental`);
 
   return response.data.response.records;

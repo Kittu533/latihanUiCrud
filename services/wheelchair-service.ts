@@ -8,7 +8,7 @@ export async function getWheelchairDetail(wheelchairId: number) {
     const response = await axios.get(`${API_BASE_URL}/wheelchair/${wheelchairId}`);
     return response.data;
   } catch (err) {
-    console.error(`❌ Gagal mengambil data kursi roda ${wheelchairId}:`, err);
+    console.error(`Gagal mengambil data kursi roda ${wheelchairId}:`, err);
     throw err;
   }
 }
@@ -19,9 +19,9 @@ export async function updateWheelchairStock(wheelchairId: number, quantityChange
     await axios.patch(`${API_BASE_URL}/wheelchair/${wheelchairId}`, {
       stock_change: quantityChange, // BE menangani perubahan stok
     });
-    console.log(`✅ Stok kursi roda ${wheelchairId} berhasil diperbarui.`);
+    console.log(`✅Stok kursi roda ${wheelchairId} berhasil diperbarui.`);
   } catch (err) {
-    console.error(`❌ Gagal memperbarui stok kursi roda ${wheelchairId}:`, err);
+    console.error(` Gagal memperbarui stok kursi roda ${wheelchairId}:`, err);
     throw err;
   }
 }

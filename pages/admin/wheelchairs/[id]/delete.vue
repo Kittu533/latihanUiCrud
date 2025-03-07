@@ -108,12 +108,12 @@ const route = useRoute();
 const router = useRouter();
 const wheelchairId = computed(() => route.params.id);
 
-// 🔥 Ambil data kursi roda sebelum ditampilkan
+// Ambil data kursi roda sebelum ditampilkan
 onMounted(() => {
   fetchWheelchairDetail(wheelchairId.value);
 });
 
-// 🔥 Hapus kursi roda dengan konfirmasi
+// Hapus kursi roda dengan konfirmasi
 const deleteWheelchair = async () => {
   const confirmed = confirm(
     "Apakah Anda yakin ingin menghapus kursi roda ini?"
