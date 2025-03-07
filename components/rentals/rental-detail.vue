@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <div class="p-4 border rounded-lg shadow-md">
       <h3 class="text-xl font-semibold">{{ rental.name }}</h3>
       <p class="text-gray-600">{{ rental.date }}</p>
@@ -13,4 +13,4 @@
   
   defineProps<{ rental: Rental }>();
   </script>
-  
+   -->

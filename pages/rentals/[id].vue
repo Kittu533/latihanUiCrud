@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="p-6">
     <h1 class="text-2xl font-bold">Detail Rental</h1>
 
@@ -27,4 +27,9 @@ const rentalStore = useRentalStore();
 rentalStore.fetchRentalDetail(route.params.id as string);
 
 const { rentalDetail, loading, error } = storeToRefs(rentalStore);
-</script>
+</script> -->
+<template>
+  <div>
+    ...
+  </div>
+</template>
