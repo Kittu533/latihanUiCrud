@@ -129,14 +129,13 @@ const { wheelchairDetail, loading, fetchWheelchairDetail, updateWheelchair } =
   useWheelchairs();
 
 const handleSubmit = () => {
-  console.log("📡 Mengirim data update kursi roda:");
-  console.log("🔍 ID:", route.params.id);
-  console.log("📊 Data:", form.value);
+  console.log("Mengirim data update kursi roda:");
+  console.log("ID:", route.params.id);
+  console.log("Data:", form.value);
 
   updateWheelchair(route.params.id, form.value);
 };
 
-// ✅ State untuk menyimpan data form
 const form = ref({
   brand: "",
   type: "Manual",
@@ -147,10 +146,8 @@ const form = ref({
   image: "",
 });
 
-// ✅ Fetch data saat halaman pertama kali dimuat
 fetchWheelchairDetail(route.params.id);
 
-// ✅ Watch untuk mengupdate form setelah data dari API berhasil di-fetch
 watch(wheelchairDetail, (newData) => {
   if (newData) {
     form.value = {
@@ -165,3 +162,4 @@ watch(wheelchairDetail, (newData) => {
   }
 });
 </script>
+

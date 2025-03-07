@@ -46,7 +46,7 @@ export function useRentals() {
 
   const addRental = async () => {
     if (!rental.value.customer_name || !rental.value.customer_phone || !rental.value.return_date) {
-      error.value = "❌ Semua field wajib diisi!";
+      error.value = "Semua field wajib diisi!";
       return;
     }
 
@@ -63,7 +63,7 @@ export function useRentals() {
       status: "Pending" as RentalStatus,
     };
 
-    console.log("🚀 newRental sebelum dikirim:", newRental);
+    console.log("newRental sebelum dikirim:", newRental);
 
     loading.value = true;
     error.value = null;
@@ -71,9 +71,9 @@ export function useRentals() {
       await createRental(newRental);
       await updateWheelchairStock(rental.value.wheelchair_id, -1);
       await fetchRentals();
-      message.value = "✅ Rental berhasil ditambahkan!";
+      message.value = "Rental berhasil ditambahkan!";
     } catch (err) {
-      console.error("❌ Gagal menambahkan rental:", err);
+      console.error("Gagal menambahkan rental:", err);
       error.value = "Gagal menambahkan rental.";
     } finally {
       loading.value = false;
@@ -91,3 +91,4 @@ export function useRentals() {
     addRental,
   };
 }
+

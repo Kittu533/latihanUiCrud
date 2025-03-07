@@ -9,5 +9,5 @@ export interface Rental {
   return_date: string;
   rental_price: number;
   total_price: number;
-  status: RentalStatus; // ✅ Enum, bukan string bebas
+  status: RentalStatus; //  Enum, bukan string bebas
 }

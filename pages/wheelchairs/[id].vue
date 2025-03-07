@@ -108,13 +108,13 @@
 import { useRouter, useRoute } from "vue-router";
 import { useWheelchairs } from "@/composables/use-wheelchair";
 import { ChevronLeftIcon, AlertCircleIcon, ImageIcon } from "lucide-vue-next";
-import { useFormat } from "@/composables/use-idr-fortmat"; // ✅ Import format fungsi
+import { useFormat } from "@/composables/use-idr-fortmat"; // Import format fungsi
 
 const router = useRouter();
 const route = useRoute();
 const { wheelchairDetail, loading, error, fetchWheelchairDetail } =
   useWheelchairs();
-const { formatPrice } = useFormat(); // ✅ Ambil fungsi formatPrice dari composable
+const { formatPrice } = useFormat(); //  Ambil fungsi formatPrice dari composable
 
 fetchWheelchairDetail(route.params.id);
 </script>

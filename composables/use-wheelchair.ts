@@ -11,7 +11,7 @@ export function useWheelchairs() {
     const availabilityFilter = ref<string>("all");
     const error = ref<string | null>(null);
 
-    // ✅ Fetch daftar semua kursi roda
+    // Fetch daftar semua kursi roda
     const fetchWheelchairs = async () => {
         loading.value = true;
         error.value = null;
@@ -19,13 +19,13 @@ export function useWheelchairs() {
         try {
             const response = await axios.get(`${API_BASE_URL}/wheelchair`);
             wheelchairs.value = response.data.response.records
-                .filter((wheelchair: Wheelchair) => wheelchair.available) // 🔥 Hanya tampilkan yang available
+                .filter((wheelchair: Wheelchair) => wheelchair.available) // Hanya tampilkan yang available
                 .map((wheelchair: Wheelchair) => ({
                     ...wheelchair,
                     price: Number(wheelchair.price), // Konversi harga ke angka
                 }));
         } catch (err) {
-            console.error("❌ Gagal mengambil kursi roda:", err);
+            console.error("Gagal mengambil kursi roda:", err);
             error.value = "Gagal memuat kursi roda.";
         } finally {
             loading.value = false;
@@ -33,14 +33,14 @@ export function useWheelchairs() {
     };
     
 
-    // ✅ Fetch detail kursi roda berdasarkan ID
+    // Fetch detail kursi roda berdasarkan ID
     const fetchWheelchairDetail = async (id: string) => {
         loading.value = true;
         error.value = null;
 
         try {
             const response = await axios.get(`${API_BASE_URL}/wheelchair/${id}`);
-            console.log("✅ Response dari API:", response.data); // Debugging
+            console.log("Response dari API:", response.data); // Debugging
 
             if (response.data && response.data.response) {
                 wheelchairDetail.value = {
@@ -53,41 +53,41 @@ export function useWheelchairs() {
                 error.value = "Data kursi roda tidak ditemukan.";
             }
         } catch (err) {
-            console.error("❌ Gagal mengambil detail kursi roda:", err);
+            console.error("Gagal mengambil detail kursi roda:", err);
             error.value = "Gagal memuat detail kursi roda.";
         } finally {
             loading.value = false;
         }
     };
 
-    // ✅ Create kursi roda baru
+    // Create kursi roda baru
     const createWheelchair = async (data: Partial<Wheelchair>) => {
         loading.value = true;
         error.value = null;
 
         try {
             const response = await axios.post(`${API_BASE_URL}/wheelchair`, data);
-            console.log("✅ Kursi roda berhasil ditambahkan:", response.data);
+            console.log("Kursi roda berhasil ditambahkan:", response.data);
 
-            alert("✅ Kursi roda berhasil ditambahkan!");
+            alert("Kursi roda berhasil ditambahkan!");
         } catch (err) {
-            console.error("❌ Gagal menambahkan kursi roda:", err);
+            console.error("Gagal menambahkan kursi roda:", err);
             error.value = "Terjadi kesalahan saat menambahkan kursi roda.";
         } finally {
             loading.value = false;
         }
     };
 
-    // ✅ Update kursi roda berdasarkan ID
+    // Update kursi roda berdasarkan ID
     const updateWheelchair = async (id: string, data: Partial<Wheelchair>) => {
         loading.value = true;
         error.value = null;
 
         try {
             await axios.patch(`${API_BASE_URL}/wheelchair/${id}`, data);
-            alert("✅ Data kursi roda berhasil diperbarui!");
+            alert("Data kursi roda berhasil diperbarui!");
         } catch (err) {
-            console.error("❌ Gagal memperbarui kursi roda:", err);
+            console.error("Gagal memperbarui kursi roda:", err);
             error.value = "Terjadi kesalahan saat memperbarui data.";
         } finally {
             loading.value = false;
@@ -96,12 +96,12 @@ export function useWheelchairs() {
 
     onMounted(fetchWheelchairs);
 
-    // ✅ Filter kursi roda berdasarkan status
+    // Filter kursi roda berdasarkan status
     const availableWheelchairs = computed(() => {
         return wheelchairs.value.filter((wheelchair) => wheelchair.available);
     });
 
-    // ✅ Filter kursi roda berdasarkan pencarian dan status
+    // Filter kursi roda berdasarkan pencarian dan status
     const filteredWheelchairs = computed(() => {
         return wheelchairs.value.filter((wheelchair) => {
             const matchesSearch =
@@ -118,16 +118,16 @@ export function useWheelchairs() {
             return matchesSearch && matchesAvailability;
         });
     });
-    // ✅ Hapus kursi roda berdasarkan ID
+    // Hapus kursi roda berdasarkan ID
     const deleteWheelchairById = async (id: string) => {
         loading.value = true;
         error.value = null;
     
         try {
-            await axios.delete(`${API_BASE_URL}/wheelchair/${id}`); // 🛑 Soft Delete
-            alert("✅ Kursi roda berhasil dihapus (soft delete)");
+            await axios.delete(`${API_BASE_URL}/wheelchair/${id}`); // Soft Delete
+            alert("Kursi roda berhasil dihapus (soft delete)");
         } catch (err) {
-            console.error("❌ Gagal menghapus kursi roda:", err);
+            console.error("Gagal menghapus kursi roda:", err);
             error.value = "Terjadi kesalahan saat menghapus kursi roda.";
         } finally {
             loading.value = false;
@@ -146,8 +146,9 @@ export function useWheelchairs() {
         error,
         fetchWheelchairs,
         fetchWheelchairDetail,
-        createWheelchair, // ✅ Fungsi untuk menambahkan kursi roda baru
-        updateWheelchair,// ✅ Fungsi untuk update kursi roda
-        deleteWheelchairById // ✅ Fungsi untuk delete kursi roda
+        createWheelchair, // Fungsi untuk menambahkan kursi roda baru
+        updateWheelchair,// Fungsi untuk update kursi roda
+        deleteWheelchairById // Fungsi untuk delete kursi roda
     };
 }
+
